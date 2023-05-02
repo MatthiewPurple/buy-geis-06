@@ -13,10 +13,10 @@ public class BuyGeis06 : MelonMod
     [HarmonyPatch(typeof(fclShopCalc), nameof(fclShopCalc.shpCreateItemList))]
     private class Patch
     {
-        // Adds Geis to shop number 4 (Asakusa)
+        // Adds Geis to shop number 4 (Asakusa) if you don't already have it
         public static void Postfix(ref fclDataShop_t pData)
         {
-            if (pData.Place == 4)
+            if (pData.Place == 4 && !dds3GlobalWork.DDS3_GBWK.hearts.Contains(13))
             {
                 pData.BuyItemList[pData.BuyItemCnt] = 76; // Adds Geis to the shop list
                 pData.BuyItemCnt++; // Adds a slot to the shop list
